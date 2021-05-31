@@ -27,11 +27,17 @@
     <div class="container h-100 div1">
       <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6">
-          <form action="/index.html" id="signup-form">
+          <form id="signup-form">
             <img class="rounded mx-auto d-block" src="pics/logo.png" alt="" />
             <h1 class="h3 mb-3 fw-normal">NEW TO THE WEBSITE? SIGN UP</h1>
             <div class="form-floating mt-1">
-              <input type="email" class="form-control" id="signup-email" />
+              <input
+                type="email"
+                class="form-control"
+                id="signup-email"
+                placeholder="e"
+                required
+              />
               <label for="signup-email">Email address</label>
             </div>
             <div class="form-floating mt-1">
@@ -39,6 +45,7 @@
                 type="password"
                 class="form-control"
                 id="signup-password"
+                placeholder="p"
                 required
               />
               <label for="signup-password">Password</label>
@@ -49,6 +56,7 @@
                 pattern="[+]{1}91-[0-9]{10}"
                 class="form-control"
                 id="phone"
+                placeholder="p"
                 required
               />
               <label for="phone">Phone Number:</label>
@@ -90,11 +98,19 @@
         const password = signupForm["signup-password"].value;
         console.log(email, password);
         // sign up the user
-        auth.createUserWithEmailAndPassword(email, password).then((cred) => {
-          console.log(cred);
-          // signupForm.reset();
-          window.location = "../index.html";
-        });
+        auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((cred) => {
+            console.log(cred);
+            // signupForm.reset();
+            return db.collection(cred.user.uid).doc("bio").set({
+              email: signupForm["signup-email"].value,
+              dateOfBirth: signupForm["dob"].value,
+            });
+          })
+          .then(() => {
+            window.location = "../index.html";
+          });
       });
     </script>
     <script
