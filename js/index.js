@@ -3,6 +3,13 @@
 const signBoard = document.querySelector(".carousel-hide");
 const logo = document.querySelector("#logout-btn");
 const loginNavs = document.querySelectorAll(".login-nav");
+
+// INITIALLY NOT SHOWING ANYTHING
+if (loginNavs != null)
+  loginNavs.forEach((nav) => {
+    nav.style.display = "none";
+  });
+if (logo != null) logo.style.display = "none";
 const setupUI = (user) => {
   if (user) {
     if (loginNavs.length != 0)
@@ -12,12 +19,7 @@ const setupUI = (user) => {
     if (signBoard != null) signBoard.style.display = "none";
     if (logo != null) logo.style.display = "block";
   } else {
-    if (loginNavs != null)
-      loginNavs.forEach((nav) => {
-        nav.style.display = "none";
-      });
     if (signBoard != null) signBoard.style.display = "block";
-    if (logo != null) logo.style.display = "none";
   }
 };
 
