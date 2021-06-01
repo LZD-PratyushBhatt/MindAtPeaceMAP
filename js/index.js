@@ -5,11 +5,7 @@ const logo = document.querySelector("#logout-btn");
 const loginNavs = document.querySelectorAll(".login-nav");
 
 // INITIALLY NOT SHOWING ANYTHING
-if (loginNavs != null)
-  loginNavs.forEach((nav) => {
-    nav.style.display = "none";
-  });
-if (logo != null) logo.style.display = "none";
+
 const setupUI = (user) => {
   if (user) {
     if (loginNavs.length != 0)
@@ -20,6 +16,11 @@ const setupUI = (user) => {
     if (logo != null) logo.style.display = "block";
   } else {
     if (signBoard != null) signBoard.style.display = "block";
+    if (loginNavs != null)
+      loginNavs.forEach((nav) => {
+        nav.style.display = "none";
+      });
+    if (logo != null) logo.style.display = "none";
   }
 };
 
