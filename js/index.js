@@ -60,3 +60,38 @@ const setupActivities = (data) => {
   });
   if (appendActivityDiv) appendActivityDiv.innerHTML = finalAppend;
 };
+
+// NEWS API
+
+const setupNews = () => {
+  const apiKey = `6115dd066a3541ea9ad405b95ec182ec`;
+  const url = `
+https://newsapi.org/v2/top-headlines?language=en&category=sports&pageSize=12&from=2021-05-25&sortBy=publishedAt&apiKey=${apiKey}`;
+
+  const appendDIV = document.querySelector(".appending-div");
+  fetch(url)
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => {
+      console.log(data.articles);
+      let appendImg = "";
+      const articles = data.articles;
+      articles.forEach((article) => {
+        console.log(article.url);
+        appendImg += `<div class="col">
+        <div class="card h-100">
+          <img src="${article.urlToImage}" class="card-img-top" alt="Image does not exist" width="350" height="250" />
+          <div class="card-body">
+            <h5 class="card-title">${article.title}</h5>
+            <p class="card-text">${article.description}</p>
+            
+          </div>
+          <div class="card-footer bg-transparent"><a href="${article.url}" class="btn btn-outline-secondary">Read more</a></div>
+        </div>
+      </div>`;
+      });
+      // console.log(appendImg);
+      appendDIV.innerHTML = appendImg;
+    });
+};

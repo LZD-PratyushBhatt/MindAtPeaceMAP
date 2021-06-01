@@ -445,7 +445,6 @@
       //   Auth state changes
       auth.onAuthStateChanged((user) => {
         setupUI(user);
-
         if (user) {
           console.log("User logged in:", user);
         } else {

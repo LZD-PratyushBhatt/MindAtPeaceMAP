@@ -117,98 +117,7 @@
       NEWS
     </p>
     <br /><br />
-    <div class="row row-cols-5 row-cols-md-3 g-4 div3">
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-01.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 1</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-02.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 2</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-03.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 3</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-04.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 4</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-05.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 5</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-06.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 6</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-04.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 7</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-03.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 8</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card">
-          <img src="pics/img-01.jpg" class="card-img-top" alt="..." />
-          <div class="card-body">
-            <h5 class="card-title">News 9</h5>
-            <p class="card-text">Description</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="row row-cols-5 row-cols-md-4 g-4 div3 appending-div"></div>
     <!--# news-->
 
     <!--Add videos below-->
@@ -378,6 +287,7 @@
       //   Auth state changes
       auth.onAuthStateChanged((user) => {
         setupUI(user);
+        setupNews();
         if (user) {
           console.log("User logged in:", user);
         } else {
