@@ -64,18 +64,19 @@ const setupActivities = (data) => {
 // NEWS API
 
 const setupNews = () => {
-//   const apiKey = `6115dd066a3541ea9ad405b95ec182ec`;
-//   const url = `
-// https://newsapi.org/v2/top-headlines?language=en&category=sports&pageSize=12&from=2021-05-25&sortBy=publishedAt&apiKey=${apiKey}`;
+  //   const apiKey = `6115dd066a3541ea9ad405b95ec182ec`;
+  //   const url = `
+  // https://newsapi.org/v2/top-headlines?language=en&category=sports&pageSize=12&from=2021-05-25&sortBy=publishedAt&apiKey=${apiKey}`;
 
   const appendDIV = document.querySelector(".appending-div");
   fetch(
-    "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=latest%20Sports%20News&pageNumber=1&pageSize=16&autoCorrect=true&withThumbnails=true&fromPublishedDate=2021-05-25&toPublishedDate=null",
+    "https://bing-news-search1.p.rapidapi.com/news/search?q=Football%20Cricket%20Tennis%20Golf%20Basketball&safeSearch=Off&textFormat=Raw&originalImg=true&freshness=Day&setLang=EN&count=20",
     {
       method: "GET",
       headers: {
+        "x-bingapis-sdk": "true",
         "x-rapidapi-key": "4d8d073680mshae09359c8128f60p1e09dbjsn06938ef7f969",
-        "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+        "x-rapidapi-host": "bing-news-search1.p.rapidapi.com",
       },
     }
   )
@@ -87,18 +88,25 @@ const setupNews = () => {
       console.log(data.value);
       let appendImg = "";
       const articles = data.value;
+      console.log(articles);
+      let i = 0;
       articles.forEach((article) => {
         console.log(article.url);
-        appendImg += `<div class="col">
-        <div class="card h-100">
-          <img src="${article.image.url}" class="card-img-top" alt="Image does not exist" width="350" height="250" />
-          <div class="card-body">
-            <h5 class="card-title">${article.title}</h5>
-            
+        console.log(article.image);
+        if (article.image != null && i < 16) {
+          i++;
+          console.log(article.image.contentUrl);
+          appendImg += `<div class="col">
+          <div class="card h-100">
+            <img src="${article.image.contentUrl}" class="card-img-top" alt="Image does not exist" width="350" height="250" />
+            <div class="card-body">
+              <h5 class="card-title">${article.name}</h5>
+              <p class="card-text">${article.description}</p>
+            </div>
+            <div class="card-footer bg-transparent"><a href="${article.url}" class="btn btn-outline-secondary">Read more</a></div>
           </div>
-          <div class="card-footer bg-transparent"><a href="${article.url}" class="btn btn-outline-secondary">Read more</a></div>
-        </div>
-      </div>`;
+        </div>`;
+        }
       });
       // console.log(appendImg);
       appendDIV.innerHTML = appendImg;
