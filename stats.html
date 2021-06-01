@@ -17,7 +17,7 @@
     <title>Statistics</title>
     <style type="text/css">
       .dragon {
-        margin-top:150px;
+        margin-top: 150px;
         margin-right: 80px;
       }
     </style>
@@ -126,13 +126,12 @@
       <div class="row row-cols-2">
         <div class="col">
           <div class="m-5">
-            <img src="pics/stats.png" alt="..." style="display: block" />
-            <h1 style="font-family: jokerman" class="">
-              <u>LET'S TRACK YOUR PROGRESS</u>
+            <img src="pics/starts.png" alt="..." style="display: block"  height="150px" />
+            <br>
+            <h1 style="font-family: jokerman;text-decoration: underline" class="">
+              LET'S TRACK YOUR PROGRESS
             </h1>
-
             <form id="submit-calories">
-              <br />
               <div class="">
                 <label style="font-size: x-large">Enter day number:</label>
                 &ensp; &ensp; &ensp; &emsp; &emsp;
@@ -306,17 +305,60 @@
                 data: dataChart.yLabels,
                 backgroundColor: "rgba(234, 234, 113, 0.75)",
                 borderColor: "rgba(22, 20, 22, 0.75)",
-                borderWidth: 1,
+                borderWidth: 2,
               },
             ],
           },
           options: {
             scales: {
+              x: {
+                ticks: {
+                  color: "black", //x-axis numbering colour
+                },
+                grid: {
+                  borderColor: "red",
+                },
+              },
               y: {
-                beginAtZero: false,
+                ticks: {
+                  color: "black", //Y-axis numbering colour
+                },
+                grid: {
+                  borderColor: "white",
+                },
+                beginAtZero: true,
               },
             },
-            animation: false,
+            animations: {
+              tension: {
+                duration: 1000,
+                easing: "easeInOutElastic",
+                from: 0.5,
+                to: 0,
+                loop: true,
+              },
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: "CALORIE TRACKER",
+                color: "black",
+                position: "bottom",
+                padding: {
+                  top: 10,
+                  bottom: 30,
+                },
+              },
+              legend: {
+                labels: {
+                  color: "black", //set the label colour
+                  // This more specific font property overrides the global property
+                  font: {
+                    size: 13,
+                  },
+                },
+              },
+            },
           },
         });
         myChart.update();
