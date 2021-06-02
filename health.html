@@ -13,7 +13,10 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
     <title>Health</title>
     <!-- <style>
       .div1 {
@@ -199,6 +202,10 @@
           </div>
         </div>
         <div class="col-lg-6">
+          <h1 style="color: aliceblue; margin-top: 100px">
+            <i class="bi bi-calendar4-week"></i>&nbsp;&nbsp;Your currently
+            Scheduled Activities
+          </h1>
           <!-- <br><br>
             <img src="pics/schedule.jpg" alt="" class="img-fluid" width="600px"> -->
           <!-- ENTER THE ACTIVITIES HERE THROUGH JAVASCRIPT -->
@@ -401,14 +408,15 @@
         db.collection(user.uid)
           .doc("ActivityScheduler")
           .collection("Activity")
-          .get()
-          .then((snapshot) => {
-            console.log(snapshot);
-            setupActivities(snapshot.docs);
-          })
-          .then(() => {
-            console.log("Content loaded successfully");
-          });
+          .onSnapshot(
+            (snapshot) => {
+              console.log(snapshot);
+              setupActivities(snapshot.docs);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         if (user) {
           console.log("User logged in:", user);
           activityForm.addEventListener("submit", (e) => {
