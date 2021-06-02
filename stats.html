@@ -379,29 +379,34 @@
           db.collection(user.uid)
             .doc("CalorieTracker")
             .collection("Calories")
-            .get()
-            .then((snapshot) => {
-              let obj = snapshot.docs;
-              obj.forEach((x) => {
-                masterXY.push([parseInt(x.data().Day), x.data().Calories]);
-              });
-              // Sort cause after the 10th day, it starts messing up,
-              // so parseInt and sort.
-              masterXY.sort((a, b) => {
-                // console.log("first=", a, " Second=", b);
-                return a[0] - b[0];
-              });
-              console.log(masterXY);
-              masterXY.forEach((ele) => {
-                xLabels.push(ele[0]);
-                yLabels.push(ele[1]);
-              });
-              resolve({ xLabels, yLabels });
-            });
+            .onSnapshot(
+              (snapshot) => {
+                let obj = snapshot.docs;
+                obj.forEach((x) => {
+                  masterXY.push([parseInt(x.data().Day), x.data().Calories]);
+                });
+                // Sort cause after the 10th day, it starts messing up,
+                // so parseInt and sort.
+                masterXY.sort((a, b) => {
+                  // console.log("first=", a, " Second=", b);
+                  return a[0] - b[0];
+                });
+                console.log(masterXY);
+                masterXY.forEach((ele) => {
+                  xLabels.push(ele[0]);
+                  yLabels.push(ele[1]);
+                });
+                resolve({ xLabels, yLabels });
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
         });
       }
       auth.onAuthStateChanged((user) => {
         setupUI(user);
+        // Display the chart when the site loads
         getData(user).then(getChart);
         if (user) {
           console.log("User logged in:", user);
@@ -417,6 +422,7 @@
                 Calories: calories,
               })
               .then(() => {
+                // Destroy and recreate the chart
                 myChart.destroy();
                 getData(user).then(getChart);
               });

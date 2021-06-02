@@ -47,6 +47,7 @@
               />
               <label for="login-email">Email address</label>
             </div>
+            <div id="empty-email"></div>
             <div class="form-floating">
               <input
                 type="password"
@@ -95,50 +96,69 @@
       // LOGIN FORM
       const loginForm = document.querySelector("#login-form");
       const findDiv = document.querySelector(".warning-append");
+      const emptyEmail = document.querySelector("#empty-email");
       let timer;
       loginForm.addEventListener("submit", (e) => {
         //   alert("Hemloasdasd");
         e.preventDefault();
 
         findDiv.innerHTML = ``;
+        emptyEmail.innerHTML = ``;
         loginForm["login-email"].setAttribute("style", "");
         loginForm["login-password"].setAttribute("style", "");
         clearTimeout(timer);
         // Get user info
         const email = loginForm["login-email"].value;
         const password = loginForm["login-password"].value;
+
+        if (email.length == 0) {
+          loginForm["login-email"].setAttribute(
+            "style",
+            "border:3px solid rgb(226, 77, 77);"
+          );
+          emptyEmail.innerHTML = `<small style="color:red">E-mail field can't be empty</small>`;
+        }
+        if (password.length == 0) {
+          loginForm["login-password"].setAttribute(
+            "style",
+            "border:3px solid rgb(226, 77, 77);"
+          );
+          findDiv.innerHTML = `<small style="color:red">Password cannot be empty<small>`;
+        }
         console.log(email, password);
         // sign up the user
-        auth
-          .signInWithEmailAndPassword(email, password)
-          .then((cred) => {
-            // console.log(cred.user);
-            // signupForm.reset();
-            window.location = "index.html";
-          })
-          .catch((err) => {
-            console.log(
-              "Either Email is not registered or the Password is wrong!"
-            );
+        if (email.length > 0 && password.length > 0) {
+          auth
+            .signInWithEmailAndPassword(email, password)
+            .then((cred) => {
+              // console.log(cred.user);
+              // signupForm.reset();
+              window.location = "index.html";
+            })
+            .catch((err) => {
+              console.log(
+                "Either Email is not registered or the Password is wrong!"
+              );
 
-            findDiv.innerHTML = ` <i class="bi bi-x-circle-fill"></i>
+              findDiv.innerHTML = ` <i class="bi bi-x-circle-fill"></i>
               <strong
                 >  Either password is wrong or e-mail is not registered.</strong
               >`;
-            loginForm["login-email"].setAttribute(
-              "style",
-              "border:3px solid rgb(226, 77, 77);"
-            );
-            loginForm["login-password"].setAttribute(
-              "style",
-              "border:3px solid rgb(226, 77, 77);"
-            );
-            timer = setTimeout(() => {
-              findDiv.innerHTML = ``;
-              loginForm["login-email"].setAttribute("style", "");
-              loginForm["login-password"].setAttribute("style", "");
-            }, 6000);
-          });
+              loginForm["login-email"].setAttribute(
+                "style",
+                "border:3px solid rgb(226, 77, 77);"
+              );
+              loginForm["login-password"].setAttribute(
+                "style",
+                "border:3px solid rgb(226, 77, 77);"
+              );
+              timer = setTimeout(() => {
+                findDiv.innerHTML = ``;
+                loginForm["login-email"].setAttribute("style", "");
+                loginForm["login-password"].setAttribute("style", "");
+              }, 6000);
+            });
+        }
       });
     </script>
     <script
