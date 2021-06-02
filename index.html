@@ -13,7 +13,16 @@
 
     <link rel="stylesheet" href="css/custom.css" />
     <link rel="stylesheet" href="css/home.css" />
-
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merienda:wght@700&family=Exo+2:wght@700&family=Nunito:wght@600&family=Raleway:ital,wght@1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
     <title>Mind At Peace</title>
   </head>
   <body>
@@ -130,7 +139,9 @@
         <div class="carousel-item active item">
           <img src="pics/slider-01.jpg" class="d-block w-100 item" alt="..." />
           <div class="carousel-caption d-none d-md-block">
-            <h5>Welcome to MAP-Mind At Peace</h5>
+            <h4 style="font-family: 'Nunito', sans-serif; font-weight: bolder">
+              Welcome to MAP-Mind At Peace
+            </h4>
             <p>
               See how you can balance life and lead a healthy,wealthy and wise
               future.
@@ -221,12 +232,12 @@
         <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-12 text-center">
             <div class="inner-column">
-              <h1>
-                Welcome to MAP-<span style="color: turquoise"
+              <h1 style="font-family: 'Merienda', cursive; color: #11e0b4">
+                Welcome to MAP-<span style="color: rgb(0, 0, 0)"
                   >Mind at Peace</span
                 >
               </h1>
-              <h4 style="color: white">Little Story</h4>
+              <h4 style="color: white; font-style: italic">Little Story</h4>
               <p style="color: white; font-size: larger">
                 Maintaining a balanced life is becoming more challenging in this
                 fast-paced modern world, and this is causing our health a hefty
@@ -276,18 +287,29 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="heading-title text-center">
-              <h2>Gallery</h2>
-              <p>
-                Here is a gallery of everything we teach you: sports,yoga and
-                meditation!!
-              </p>
+              <h1
+                style="
+                  font-family: 'Raleway', sans-serif;
+                  font-weight: bolder;
+                  font-size: 50px;
+                  color: #2a3525;
+                "
+              >
+                Gallery
+              </h1>
+              <strong>
+                <em style="color: rgb(214, 151, 69)">
+                  Here is a gallery of everything we teach you: Sports,Yoga and
+                  Meditation!!
+                </em>
+              </strong>
             </div>
           </div>
         </div>
-        <div class="tz-gallery">
+        <div class="tz-gallery" id="stay-here">
           <div class="row">
             <div class="col-sm-12 col-md-4 col-lg-6">
-              <a class="lightbox" href="pics/gallery-01.jpg">
+              <a class="lightbox" href="#stay-here">
                 <img
                   class="img-fluid"
                   src="pics/gallery-01.jpg"
@@ -296,7 +318,7 @@
               </a>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-6">
-              <a class="lightbox" href="pics/gallery-02.jpg">
+              <a class="lightbox" href="#stay-here">
                 <img
                   class="img-fluid"
                   src="pics/gallery-02.jpg"
@@ -305,7 +327,7 @@
               </a>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-6">
-              <a class="lightbox" href="pics/gallery-03.jpg">
+              <a class="lightbox" href="#stay-here">
                 <img
                   class="img-fluid"
                   src="pics/gallery-03.jpg"
@@ -314,7 +336,7 @@
               </a>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-6">
-              <a class="lightbox" href="pics/gallery-04.jpg">
+              <a class="lightbox" href="#stay-here">
                 <img
                   class="img-fluid"
                   src="pics/gallery-04.jpg"
@@ -329,41 +351,52 @@
 
     <!--End Gallery-->
 
-    <div class="contact-imfo-box">
-      <div
-        class="container"
-        style="background-color: #f0ad4e; color: white; border-radius: 20px"
-      >
-        <div class="row">
-          <div class="col-md-4">
-            <i class="fa"></i>
-            <div class="overflow-hidden">
-              <h4>Phone</h4>
-              <p class="lead" style="color: white">+91 87600 00678</p>
+    <!-- Start Footer -->
+    <footer class="footer-area bg-f">
+      <div class="contact-imfo-box">
+        <div
+          class="container"
+          style="background-color: #f0ad4e; color: white; border-radius: 20px"
+        >
+          <div class="row">
+            <div class="col-md-4">
+              <div class="overflow-hidden">
+                <h4>
+                  <i class="bi bi-telephone-fill" style="font-size: 1.05rem"></i
+                  >&nbsp;Phone
+                </h4>
+                <p class="lead" style="color: white">
+                  &nbsp;&nbsp;&nbsp;+91 87600 00678
+                </p>
+              </div>
             </div>
-          </div>
 
-          <div class="col-md-4">
-            <i class="fa"></i>
-            <div class="overflow-hidden">
-              <h4>Email</h4>
-              <p class="lead" style="color: white">mindatpeace@gmail.com</p>
+            <div class="col-md-4">
+              <div class="overflow-hidden">
+                <h4>
+                  <i class="bi bi-envelope-fill" style="font-size: 1.05rem"></i
+                  >&nbsp;Email
+                </h4>
+                <p class="lead" style="color: white">
+                  &nbsp;&nbsp;&nbsp;&nbsp;mindatpeace@gmail.com
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <i class="fa"></i>
-            <div class="overflow-hidden">
-              <h4>Location</h4>
-              <p class="lead" style="color: white">Manipal</p>
+            <div class="col-md-4">
+              <div class="overflow-hidden">
+                <h4>
+                  <i class="bi bi-globe2" style="font-size: 1.05rem"></i
+                  >&nbsp;Location
+                </h4>
+                <p class="lead" style="color: white">
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Manipal
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- End Contact info -->
-
-    <!-- Start Footer -->
-    <footer class="footer-area bg-f">
+      <br />
       <div class="container">
         <div class="row">
           <div class="col-lg-5 col-md-6">
@@ -388,7 +421,7 @@
                 />
                 <button
                   type="submit"
-                  class="submit"
+                  class="submit mt-2"
                   style="
                     background-color: #f0ad4e;
                     color: white;
