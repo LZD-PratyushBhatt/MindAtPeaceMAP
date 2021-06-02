@@ -12,7 +12,10 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
-
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+    />
     <title>Login</title>
 
     <style>
@@ -28,10 +31,14 @@
       <div class="row h-100 justify-content-center align-items-center">
         <div class="col-15 col-md-8 col-lg-6">
           <form id="login-form">
-            <img class="rounded mx-auto d-block" src="pics/map-logo-signup-login.png" alt="" />
+            <img
+              class="rounded mx-auto d-block"
+              src="pics/map-logo-signup-login.png"
+              alt=""
+            />
             <h1 class="h3 mb-3 fw-normal">LOGIN</h1>
 
-            <div class="form-floating">
+            <div class="form-floating mb-2">
               <input
                 type="email"
                 class="form-control"
@@ -48,6 +55,12 @@
                 placeholder="Password"
               />
               <label for="login-password">Password</label>
+            </div>
+            <div style="color: red" class="warning-append">
+              <!-- <i class="bi bi-x-circle-fill"></i>
+              <strong
+                >Either password is wrong or Email is not registered.</strong
+              > -->
             </div>
             <div class="checkbox mb-3">
               <label class="mt-1">
@@ -81,10 +94,16 @@
       const db = firebase.firestore();
       // LOGIN FORM
       const loginForm = document.querySelector("#login-form");
+      const findDiv = document.querySelector(".warning-append");
+      let timer;
       loginForm.addEventListener("submit", (e) => {
         //   alert("Hemloasdasd");
         e.preventDefault();
 
+        findDiv.innerHTML = ``;
+        loginForm["login-email"].setAttribute("style", "");
+        loginForm["login-password"].setAttribute("style", "");
+        clearTimeout(timer);
         // Get user info
         const email = loginForm["login-email"].value;
         const password = loginForm["login-password"].value;
@@ -101,6 +120,24 @@
             console.log(
               "Either Email is not registered or the Password is wrong!"
             );
+
+            findDiv.innerHTML = ` <i class="bi bi-x-circle-fill"></i>
+              <strong
+                >  Either password is wrong or e-mail is not registered.</strong
+              >`;
+            loginForm["login-email"].setAttribute(
+              "style",
+              "border:3px solid rgb(226, 77, 77);"
+            );
+            loginForm["login-password"].setAttribute(
+              "style",
+              "border:3px solid rgb(226, 77, 77);"
+            );
+            timer = setTimeout(() => {
+              findDiv.innerHTML = ``;
+              loginForm["login-email"].setAttribute("style", "");
+              loginForm["login-password"].setAttribute("style", "");
+            }, 6000);
           });
       });
     </script>

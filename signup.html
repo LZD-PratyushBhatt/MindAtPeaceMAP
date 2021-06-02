@@ -28,43 +28,47 @@
       <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6">
           <form id="signup-form">
-            <img class="rounded mx-auto d-block" src="pics/map-logo-signup-login.png" alt="" />
+            <img
+              class="rounded mx-auto d-block"
+              src="pics/map-logo-signup-login.png"
+              alt=""
+            />
             <h1 class="h3 mb-3 fw-normal">NEW TO THE WEBSITE? SIGN UP</h1>
             <div class="form-floating mt-1">
               <input
-                type="email"
+                type="text"
                 class="form-control"
                 id="signup-email"
                 placeholder="e"
-                required
               />
               <label for="signup-email">Email address</label>
             </div>
+            <div id="wrong-email"></div>
             <div class="form-floating mt-1">
               <input
                 type="password"
                 class="form-control"
                 id="signup-password"
                 placeholder="p"
-                required
               />
               <label for="signup-password">Password</label>
             </div>
+            <div class="wrong-password"></div>
             <div class="form-floating mt-1">
               <input
-                type="tel"
-                pattern="[+]{1}91-[0-9]{10}"
+                type="text"
                 class="form-control"
                 id="phone"
                 placeholder="p"
-                required
               />
               <label for="phone">Phone Number:</label>
             </div>
+            <div class="wrong-tele"></div>
             <div class="form-floating mt-1">
-              <input type="date" class="form-control" id="dob" required />
+              <input type="date" class="form-control" id="dob" />
               <label for="dob">Date of birth:</label>
             </div>
+            <div class="enter-date"></div>
             <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">
               Register
             </button>
@@ -90,27 +94,97 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
       const signupForm = document.querySelector("#signup-form");
+      const wrongPassword = document.querySelector(".wrong-password");
+      const wrongTele = document.querySelector(".wrong-tele");
+      const wrongEmail = document.querySelector("#wrong-email");
+      const enterDate = document.querySelector(".enter-date");
       signupForm.addEventListener("submit", (e) => {
         //   alert("Hemloasdasd");
         e.preventDefault();
+
+        // CLEAN THE FORM WHEN RECLICKED
+        wrongTele.innerHTML = ``;
+        wrongEmail.innerHTML = ``;
+        enterDate.innerHTML = ``;
+        wrongPassword.innerHTML = ``;
+        signupForm["phone"].setAttribute("style", "");
+        signupForm["signup-email"].setAttribute("style", "");
+        signupForm["dob"].setAttribute("style", "");
+        signupForm["signup-password"].setAttribute("style", "");
+
+        // CLEANING DONE!!!!!!!!!!!!!!!!!!
+
         // Get user info
         const email = signupForm["signup-email"].value;
         const password = signupForm["signup-password"].value;
+        const tele = signupForm["phone"].value;
+        const dates = signupForm["dob"].value;
         console.log(email, password);
         // sign up the user
-        auth
-          .createUserWithEmailAndPassword(email, password)
-          .then((cred) => {
-            console.log(cred);
-            // signupForm.reset();
-            return db.collection(cred.user.uid).doc("bio").set({
-              email: signupForm["signup-email"].value,
-              dateOfBirth: signupForm["dob"].value,
+
+        const patternTele = /^[+]{1}91-[0-9]{10}$/;
+        const patternEmail = /^[\w.]+@\w+\.[\w]+/;
+        let matchTele = tele.match(patternTele);
+        let matchEmail = email.match(patternEmail);
+        console.log("Dates", dates, dates.length);
+        if (matchTele == null) {
+          wrongTele.innerHTML = `<small style="color:red">Enter a valid Phone number <br> Required Pattern: +91-9027057319</small>`;
+          // alert("HElllllo!");
+          signupForm["phone"].setAttribute(
+            "style",
+            "border:2px solid rgb(226, 77, 77);"
+          );
+        }
+        if (matchEmail == null) {
+          wrongEmail.innerHTML = `<small style="color:red">This is not a valid email-address</small>`;
+          signupForm["signup-email"].setAttribute(
+            "style",
+            "border:2px solid rgb(226, 77, 77);"
+          );
+        }
+        if (dates.length == 0) {
+          enterDate.innerHTML = `<small style="color:red">Please enter your Date of Birth</small>`;
+          signupForm["dob"].setAttribute(
+            "style",
+            "border:2px solid rgb(226, 77, 77);"
+          );
+        }
+
+        if (password.length < 8) {
+          signupForm["signup-password"].setAttribute(
+            "style",
+            "border:2px solid rgb(226, 77, 77);"
+          );
+          wrongPassword.innerHTML = `<small style="color:red">Password length must be of atleast 8 characters</small>`;
+        }
+        if (
+          password.length >= 8 &&
+          matchTele != null &&
+          matchEmail != null &&
+          dates.length > 0
+        ) {
+          auth
+            .createUserWithEmailAndPassword(email, password)
+            .then((cred) => {
+              console.log(cred);
+              // signupForm.reset();
+              return db.collection(cred.user.uid).doc("bio").set({
+                email: signupForm["signup-email"].value,
+                dateOfBirth: signupForm["dob"].value,
+              });
+            })
+            .then(() => {
+              window.location = "index.html";
+            })
+            .catch((err) => {
+              console.log(err.message);
+              wrongEmail.innerHTML = `<small style="color:red">${err.message}</small>`;
+              signupForm["signup-email"].setAttribute(
+                "style",
+                "border:2px solid rgb(226, 77, 77);"
+              );
             });
-          })
-          .then(() => {
-            window.location = "index.html";
-          });
+        }
       });
     </script>
     <script
