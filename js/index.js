@@ -73,7 +73,7 @@ const setupNews = () => {
 
   const appendDIV = document.querySelector(".appending-div");
   fetch(
-    "https://bing-news-search1.p.rapidapi.com/news/search?q=Football%20Cricket%20Tennis%20Golf%20Basketball&safeSearch=Off&textFormat=Raw&originalImg=true&freshness=Day&setLang=EN&count=20",
+    "https://bing-news-search1.p.rapidapi.com/news/search?q=Football%20Cricket%20Tennis%20Basketball&safeSearch=Off&textFormat=Raw&originalImg=true&freshness=Day&setLang=EN&count=20",
     {
       method: "GET",
       headers: {
@@ -88,17 +88,17 @@ const setupNews = () => {
       return response.json();
     })
     .then((data) => {
-      console.log(data.value);
+      // console.log(data.value);
       let appendImg = "";
       const articles = data.value;
       console.log(articles);
       let i = 0;
       articles.forEach((article) => {
-        console.log(article.url);
+        // console.log(article.url);
         console.log(article.image);
         if (article.image != null && i < 16) {
           i++;
-          console.log(article.image.contentUrl);
+          console.log("Hello",article.image.contentUrl);
           appendImg += `<div class="col">
           <div class="card h-100">
             <img src="${article.image.contentUrl}" class="card-img-top" alt="Image does not exist" width="350" height="250" />
