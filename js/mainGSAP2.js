@@ -24,6 +24,5 @@ tl.to(".from-top .tile", {
     },
     1
   )
-  .from(".nav-item", { opacity: 0, duration: 1, stagger: 0.1 });
-
-tl.set(".from-top .tile", { top: "0", height: "0" });
+  .from(".nav-item", { opacity: 0, duration: 1, stagger: 0.1 })
+  .set(".from-top .tile", { top: "0", height: "0" });

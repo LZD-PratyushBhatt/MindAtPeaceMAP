@@ -23,7 +23,14 @@
       }
     </style>
   </head>
-  <body class="text-center h-100">
+  <body
+    class="text-center h-100"
+    style="
+      background: url('pics/signup-cover.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+    "
+  >
     <div class="transition-container from-left">
       <span class="tile"></span>
       <span class="tile"></span>
@@ -52,12 +59,14 @@
       <div class="row justify-content-center align-items-center">
         <div class="col-12 col-md-8 col-lg-6">
           <form id="signup-form">
+            <br> <br>
             <img
-              class="rounded mx-auto d-block"
+              class=""
+              style="border-radius: 60% 60%;"
               src="pics/map-logo-signup-login.png"
               alt=""
             />
-            <h1 class="h3 mb-3 fw-normal">NEW TO THE WEBSITE? SIGN UP</h1>
+            <h1 class="h3 mb-3 fw-bold" style="color: rgb(230, 48, 42);">NEW TO THE WEBSITE? SIGN UP</h1>
             <div class="form-floating mt-1">
               <input
                 type="text"
@@ -93,7 +102,7 @@
               <label for="dob">Date of birth:</label>
             </div>
             <div class="enter-date"></div>
-            <button class="w-100 btn btn-lg btn-primary mt-3" type="submit">
+            <button class="w-100 btn btn-lg btn-outline-danger mt-3" type="submit">
               Register
             </button>
             <p class="mt-5 mb-3 text-muted">©2021</p>
